@@ -16,4 +16,6 @@ class DoubanItem(Item):
     quote = Field()
     comment_nums = Field()
     pubday = Field()
+    price = Field()
+    url = Field()
 

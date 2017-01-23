@@ -29,11 +29,17 @@ class DoubanSpider(CrawlSpider):
 
             bookname = info.xpath('td/div/a/@title').extract()[0]
 
+            url = info.xpath('td/div/a/@href').extract()[0]
+
             author_info = info.xpath('td/p/text()').extract()[0]
 
             author_info = str(author_info)
 
             author_infos = author_info.split('/')
+
+            price = str(author_infos[len(author_infos)-1])
+
+
 
             rating = info.xpath('td/div/span[2]/text()').extract()[0]
             comment_nums = info.xpath('td/div/span[3]/text()').extract()[0]
@@ -52,7 +58,8 @@ class DoubanSpider(CrawlSpider):
             item['quote']=quote
             item['comment_nums'] = filter(str.isdigit, (str(comment_nums)))
             item['pubday']=author_infos[len(author_infos)-2]
-
+            item['price'] = price
+            item['url']=url
             yield item
 
 
